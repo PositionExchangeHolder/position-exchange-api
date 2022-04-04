@@ -41,7 +41,12 @@ GET /api/v1/address/{{address}}
 {
   "data": {
     "balance": "3.856102266623459808087e+21",
-    "totalPosiBalance": "3.856102266623459808087e+21"
+    "totalPosiBalance": {
+      "total": "3.856102266623459808087e+21",
+      "walletBalance": "3.856102266623459808087e+21",
+      "stakingBalance": "0",
+      "pendingBalance": "0"
+    }
   }
 }
 ```
@@ -79,12 +84,17 @@ OR
         "pendingReward": "0"
       }
     ],
-    "nftPoolBalances": {
+    "nftPoolBalance": {
       "pool": "v2",
       "stakingBalance": "200000000000000000000",
       "pendingReward": "15239747273991635813"
     },
-    "totalPosiBalance": "4.0713420138974514439e+21"
+    "totalPosiBalance": {
+      "total": "4.0713420138974514439e+21",
+      "walletBalance": "3.856102266623459808087e+21",
+      "stakingBalance": "200000000000000000000",
+      "pendingBalance": "15239747273991635813"
+    }
   }
 }
 ```

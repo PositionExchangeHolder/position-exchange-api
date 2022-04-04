@@ -10,29 +10,41 @@ export const getTokenBalance = async (address: string): Promise<BigNumber> => {
   return new BigNumber(balance)
 }
 
-export const getTotalPosiBalance = (walletBalance: BigNumber, stakingPools?: StakingPool[], nftPool?: NftPool): BigNumber => {
-  let totalStakingPoolsBalance: BigNumber = ZERO_BIGNUMBER
-  let totalNftPoolBalance: BigNumber = ZERO_BIGNUMBER
+export const getTotalPosiBalance = (
+  walletBalance: BigNumber,
+  stakingPools?:
+  StakingPool[],
+  nftPool?: NftPool
+): {
+  total: BigNumber,
+  walletBalance: BigNumber,
+  stakingBalance: BigNumber,
+  pendingBalance: BigNumber
+} => {
+  let totalPosiStaking: BigNumber = ZERO_BIGNUMBER
+  let totalPosiPending: BigNumber = ZERO_BIGNUMBER
   
   if (stakingPools) {
     for (let i = 0; i < stakingPools.length; i++) {
       const pool = stakingPools[i]
       if (pool.pid === '1') {
-        totalStakingPoolsBalance = totalStakingPoolsBalance
-          .plus(pool.stakingBalance
-          .plus(pool.pendingReward))
+        totalPosiStaking = totalPosiStaking.plus(pool.stakingBalance)
       }
 
-      totalStakingPoolsBalance = totalStakingPoolsBalance.plus(pool.pendingReward)
+      totalPosiPending = totalPosiPending.plus(pool.pendingReward)
     }
   }
   if (nftPool) {
-    totalNftPoolBalance = nftPool.stakingBalance.plus(nftPool.pendingReward)
+    totalPosiStaking = totalPosiStaking.plus(nftPool.stakingBalance)
+    totalPosiPending = totalPosiPending.plus(nftPool.pendingReward)
   }
 
-  return (
-    walletBalance
-    .plus(totalStakingPoolsBalance)
-    .plus(totalNftPoolBalance)
-  )
+  const total = {
+    total: walletBalance.plus(totalPosiStaking).plus(totalPosiPending),
+    walletBalance: walletBalance,
+    stakingBalance: totalPosiStaking,
+    pendingBalance: totalPosiPending
+  }
+
+  return total
 }

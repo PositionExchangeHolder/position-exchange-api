@@ -18,7 +18,7 @@ export default async (req: VercelRequest, res: VercelResponse): Promise<VercelRe
     
     const balance = await getTokenBalance(address)
     let stakingPoolBalances
-    let nftPoolBalances
+    let nftPoolBalance
     
     let data = { balance }
     
@@ -33,11 +33,11 @@ export default async (req: VercelRequest, res: VercelResponse): Promise<VercelRe
 
     const nftPools = req.query.nftPool as string
     if (nftPools === 'true') {
-      nftPoolBalances = await getStakingBalanceAndPendingRewardOfNftPoolV2(address)
-      data = { ...data, ...{ nftPoolBalances } }
+      nftPoolBalance = await getStakingBalanceAndPendingRewardOfNftPoolV2(address)
+      data = { ...data, ...{ nftPoolBalance } }
     }
 
-    const totalPosiBalance = getTotalPosiBalance(balance, stakingPoolBalances, nftPoolBalances)
+    const totalPosiBalance = getTotalPosiBalance(balance, stakingPoolBalances, nftPoolBalance)
     data = { ...data, ...{ totalPosiBalance } }
 
     return res.status(200).json({ data })
