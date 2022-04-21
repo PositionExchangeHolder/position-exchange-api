@@ -2,6 +2,11 @@
 
 Serverless API implementation for Position Token Prices and Account Balances
 
+## Development
+```bash
+$ vercel dev
+```
+
 ## APIs
 
 ### Prices
@@ -30,34 +35,18 @@ GET /api/v1/prices
 GET /api/v1/address/{{address}}
 ```
 
-**Parameters**
-| Name | Type | Mandatory | Description
-|---|---|---|---|
-| pid | STRING | NO | Pool's pid. ``Eg: 1,2,3`` |
-| nftPool | BOOLEAN | NO | Default ``true``|
-
 **Response**
-```json
-{
-  "data": {
-    "balance": "3.856102266623459808087e+21",
-    "totalPosiBalance": {
-      "total": "3.856102266623459808087e+21",
-      "walletBalance": "3.856102266623459808087e+21",
-      "stakingBalance": "0",
-      "pendingBalance": "0"
-    }
-  }
-}
-```
-
-OR
 
 ```json
 {
   "data": {
     "balance": "3.856102266623459808087e+21",
     "stakingPoolBalances": [
+      {
+        "pid": "0",
+        "stakingBalance": "0",
+        "pendingReward": "0"
+      },
       {
         "pid": "1",
         "stakingBalance": "0",
