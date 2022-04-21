@@ -3,9 +3,14 @@ import { ZERO_BIGNUMBER } from './constant'
 import { getPositionTokenContract } from './contract'
 import { NftPool, StakingPool } from './types'
 
-export const getTokenBalance = async (address: string): Promise<BigNumber> => {
+export const getTokenBalance = async (
+  address: string
+): Promise<BigNumber> => {
   const positionToken = getPositionTokenContract()
-  const balance = await positionToken.methods.balanceOf(address).call()
+  const balance = await positionToken
+    .methods
+    .balanceOf(address)
+    .call()
 
   return new BigNumber(balance)
 }
