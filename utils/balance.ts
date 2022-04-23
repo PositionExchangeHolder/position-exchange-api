@@ -32,7 +32,7 @@ export const getTotalPosiBalance = (
   if (stakingPools) {
     for (let i = 0; i < stakingPools.length; i++) {
       const pool = stakingPools[i]
-      if (pool.pid === '1') {
+      if (pool.pid === 1) {
         totalPosiStaking = totalPosiStaking.plus(pool.stakingBalance)
       }
 

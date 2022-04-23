@@ -1,7 +1,10 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { getPrices } from '../../../utils/getPrices'
 
-export default async (req: VercelRequest, res: VercelResponse): Promise<VercelResponse | void> => {
+export default async (
+  req: VercelRequest,
+  res: VercelResponse
+): Promise<VercelResponse | void> => {
   if (req.method?.toUpperCase() === 'OPTIONS') {
     return res.status(204).end()
   }

@@ -3,7 +3,10 @@ import { getTokenBalance, getTotalPosiBalance } from '../../../utils/balance'
 import { getStakingBalanceAndPendingRewardOfNftPoolV2 } from '../../../utils/nftPool'
 import { getStakingBalanceAndPendingRewardOfStakingPool } from '../../../utils/stakingPool'
 
-export default async (req: VercelRequest, res: VercelResponse): Promise<VercelResponse | void> => {
+export default async (
+  req: VercelRequest,
+  res: VercelResponse
+): Promise<VercelResponse | void> => {
   if (req.method?.toUpperCase() === 'OPTIONS') {
     return res.status(204).end()
   }
