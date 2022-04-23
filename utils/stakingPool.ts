@@ -2,8 +2,27 @@ import BigNumber from 'bignumber.js'
 import { getPositionStakingPoolContract } from './contract'
 import { StakingPool } from './types'
 
+const getNameOfPoolByPid = (pid: number): string => {
+  switch (pid) {
+    case 0:
+      return 'POSI-BUSD'
+    case 1:
+      return 'POSI'
+    case 2:
+      return 'POSI-WBNB'
+    case 3:
+      return 'Bond01'
+    case 4:
+      return 'Bond02'
+    case 5:
+      return 'Bond03'
+    default:
+      return ''
+  }
+}
+
 export const getStakingBalance = async (
-  pid: string,
+  pid: number,
   address: string
 ): Promise<BigNumber> => {
   const positionStakingPoolContract = getPositionStakingPoolContract()
@@ -16,7 +35,7 @@ export const getStakingBalance = async (
 }
 
 export const getPendingReward = async (
-  pid: string,
+  pid: number,
   address: string
 ): Promise<BigNumber> => {
   const positionStakingPoolContract = getPositionStakingPoolContract()
@@ -45,11 +64,12 @@ export const getStakingBalanceAndPendingRewardOfStakingPool = async (
 
   const balances = Promise.all(
     Array.from(Array(poolLength).keys()).map(async pid => {
-      const stakingBalance = await getStakingBalance(pid.toString(), address)
-      const pendingReward = await getPendingReward(pid.toString(), address)
+      const stakingBalance = await getStakingBalance(pid, address)
+      const pendingReward = await getPendingReward(pid, address)
   
       return {
-        pid: pid.toString(),
+        pid,
+        name: getNameOfPoolByPid(pid),
         stakingBalance,
         pendingReward
       }

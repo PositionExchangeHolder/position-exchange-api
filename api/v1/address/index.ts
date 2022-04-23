@@ -15,22 +15,28 @@ export default async (req: VercelRequest, res: VercelResponse): Promise<VercelRe
       return res.status(404).json({ error: { message: 'Not found' } })
     }
     
-    const balance = await getTokenBalance(address)
-    let stakingPoolBalances
-    let nftPoolBalance
+    const [
+      walletBalance,
+      stakingPoolBalances,
+      nftPoolBalance
+    ] = await Promise.all([
+      await getTokenBalance(address),
+      await getStakingBalanceAndPendingRewardOfStakingPool(address),
+      await getStakingBalanceAndPendingRewardOfNftPoolV2(address)
+    ])
     
-    let data = { balance }
-    
-    // Staking Pool
-    stakingPoolBalances = await getStakingBalanceAndPendingRewardOfStakingPool(address)
-    data = { ...data, ...{ stakingPoolBalances } }
+    const totalPosiBalance = getTotalPosiBalance(
+      walletBalance,
+      stakingPoolBalances,
+      nftPoolBalance
+    )
 
-    // NFT Pool
-    nftPoolBalance = await getStakingBalanceAndPendingRewardOfNftPoolV2(address)
-    data = { ...data, ...{ nftPoolBalance } }
-
-    const totalPosiBalance = getTotalPosiBalance(balance, stakingPoolBalances, nftPoolBalance)
-    data = { ...data, ...{ totalPosiBalance } }
+    const data = {
+      walletBalance,
+      stakingPoolBalances,
+      nftPoolBalance,
+      totalPosiBalance
+    }
 
     return res.status(200).json({ data })
   } catch (error) {
