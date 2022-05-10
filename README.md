@@ -1,4 +1,4 @@
-# Position Token Prices API
+# Position Exchange API
 
 Serverless API implementation for Position Token Prices and Account Balances
 
