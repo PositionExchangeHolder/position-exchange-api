@@ -10,7 +10,7 @@ const getBscScanApi = (
   startblock = 0,
   endblock = 99999999
 ): string => {
-  const BSCSCAN_API_KEY =  process.env.BSCSCAN_API_KEY || '56GH5VAREUA2XI8WJD1M2BJXX72Z29E6E1'
+  const BSCSCAN_API_KEY =  process.env.BSCSCAN_API_KEY
 
   return `https://api.bscscan.com/api?module=account&action=txlist`
     + `&address=${address}`
