@@ -21,15 +21,19 @@ const FOR_BYTE_DIRECTION_API = 'https://www.4byte.directory/api/'
  */
 
 export const getTextSignature = async (bytesSignature: string): Promise<string> => {
-  const api = `${FOR_BYTE_DIRECTION_API}/v1/signatures/?hex_signature=${bytesSignature}`
-  const res = await axios.get(api)
-  const { data } = res
-
-  if (data.count < 1) {
+  try {
+    const api = `${FOR_BYTE_DIRECTION_API}/v1/signatures/?hex_signature=${bytesSignature}`
+    const res = await axios.get(api)
+    const { data } = res
+  
+    if (data.count < 1) {
+      return ''
+    }
+    
+    const textSignature = data.results[0].text_signature
+  
+    return textSignature
+  } catch (error) {
     return ''
   }
-  
-  const textSignature = data.results[0].text_signature
-
-  return textSignature
 }
