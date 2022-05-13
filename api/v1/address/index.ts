@@ -1,4 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
+import { isAddress } from '../../../utils/address'
 import { getTokenBalance, getTotalPosiBalance } from '../../../utils/balance'
 import { getStakingBalanceAndPendingRewardOfNftPoolV2 } from '../../../utils/nftPool'
 import { getStakingBalanceAndPendingRewardOfStakingPool } from '../../../utils/stakingPool'
@@ -14,8 +15,12 @@ export default async (
   try {
     const address = req.query.address as string
     
-    if (!address) {
-      return res.status(404).json({ error: { message: 'Not found' } })
+    if (!address || !isAddress(address)) {
+      return res.status(400).json({
+        error: {
+          message: 'Bad Request: Invalid address'
+        }
+      })
     }
     
     const [

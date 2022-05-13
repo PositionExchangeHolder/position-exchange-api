@@ -147,3 +147,97 @@ GET /api/v1/deployer/transactions
   ]
 }
 ```
+
+## APIs For Analytics Site
+
+### Verify Account
+
+```
+POST /api/v1/account/verify
+```
+
+**Request Body**
+
+```json
+{
+  "message": "152466195" // deadline
+  "messageHash": "0x423a97c2..."
+  "v": "0x1c"
+  "r": "0xccb3549e..."
+  "s": "0x6ec89ab6..."
+  "signature": "0xccb3549e..."
+}
+```
+
+**Response**
+
+```json
+{
+  "success": true,
+  "address": "0xc4a6eea...",
+  "token": "eyJhbGciOiJIU..."
+}
+```
+
+
+### Get Account Info
+
+```
+GET /api/v1/account/info/:address
+```
+
+**Response**
+
+```json
+{
+  "success": true,
+  "data": {
+    "active": true,
+    "address": "0xc4a6eea...",
+    "name": "John",
+    "updated_at": 1652477301,
+    "created_at": 1652477301
+  }
+}
+```
+
+### Update Account Info
+
+```
+POST /api/v1/account/info
+```
+
+**Header**
+
+```
+Bearer Token: "eyJhbGciOiJIU..."
+```
+
+**Request Body**
+
+```json
+{
+  "address": "0xc4a6eea...",
+  "name": "...",
+  "email": "...",
+  "github": "...",
+  "twitter": "...",
+  "ref": "..."
+}
+```
+
+**Response**
+
+```json
+{
+    "success": true,
+    "address": "0xc4a6eea...",
+    "data": {
+      "name": "...",
+      "email": "...",
+      "github": "...",
+      "twitter": "...",
+      "ref": "..."
+    }
+}
+```

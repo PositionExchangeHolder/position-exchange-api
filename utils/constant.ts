@@ -18,3 +18,9 @@ export const POSITION_NFT_REWARD_POOL_V1_ADDRESS = '0xbe9ff181bfa9dd78191b81b23f
 export const POSITION_NFT_REWARD_POOL_V2_PROXY_ADDRESS = '0x6257229fa379afdbb91732091b5de32cdb759845'
 
 export const ZERO_BIGNUMBER = new BigNumber(0)
+
+export const DB_FIREBASE = {
+  COLLECTIONS: {
+    ACCOUNT_INFO: 'account-info'
+  }
+}

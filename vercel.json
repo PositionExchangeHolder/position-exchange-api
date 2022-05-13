@@ -20,6 +20,18 @@
     {
       "source": "/api/v1/deployer/transactions",
       "destination": "/api/v1/deployer/transactions"
+    },
+    {
+      "source": "/api/v1/account/verify",
+      "destination": "/api/v1/account/verify"
+    },
+    {
+      "source": "/api/v1/account/update-info",
+      "destination": "/api/v1/account/update-info"
+    },
+    {
+      "source": "/api/v1/account/info/:address",
+      "destination": "/api/v1/account/info"
     }
   ],
   "headers": [
