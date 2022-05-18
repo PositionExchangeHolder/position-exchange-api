@@ -18,6 +18,10 @@
       "destination": "/api/v1/address"
     },
     {
+      "source": "/api/v1/address/:address/pnl",
+      "destination": "/api/v1/address/pnl"
+    },
+    {
       "source": "/api/v1/deployer/transactions",
       "destination": "/api/v1/deployer/transactions"
     },
