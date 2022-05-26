@@ -1,15 +1,14 @@
 import BigNumber from 'bignumber.js'
 
 export interface StakingPool {
-  pid: number
+  pid: number | string
+  name: string
   stakingBalance: BigNumber
   pendingReward: BigNumber
 }
 
-export interface NftPool {
-  pool: 'v1' | 'v2'
-  stakingBalance: BigNumber
-  pendingReward: BigNumber
+export interface NftPool extends StakingPool {
+
 }
 
 export interface BscScanTx {

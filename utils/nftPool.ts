@@ -35,7 +35,8 @@ export const getStakingBalanceAndPendingRewardOfNftPoolV1 = async (
   ])
 
   return {
-    pool: 'v1',
+    pid: 'v1',
+    name: 'NFT Pool V1',
     stakingBalance,
     pendingReward
   }
@@ -75,8 +76,20 @@ export const getStakingBalanceAndPendingRewardOfNftPoolV2 = async (
   ])
 
   return {
-    pool: 'v2',
+    pid: 'v2',
+    name: 'NFT Pool V2',
     stakingBalance,
     pendingReward
   }
+}
+
+export const getStakingBalanceAndPendingRewardOfNftPools = async (
+  address: string
+): Promise<NftPool[]> => {
+  const [balancesV1, balancesV2] = await Promise.all([
+    await getStakingBalanceAndPendingRewardOfNftPoolV1(address),
+    await getStakingBalanceAndPendingRewardOfNftPoolV2(address)
+  ])
+
+  return [balancesV1, balancesV2]
 }
