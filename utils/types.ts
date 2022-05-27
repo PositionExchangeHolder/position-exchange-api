@@ -51,6 +51,7 @@ export interface AccountSchema {
   updated_at: number
   // Info
   name?: string
+  image?: string // url
   email?: string
   github?: string
   twitter?: string
