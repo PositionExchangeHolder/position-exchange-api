@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 import { getPositionNftRewardPoolV1Contract, getPositionNftRewardPoolV2Contract } from './contract'
 import { NftPool } from './types'
 
-export const getStakingBalanceV1 = async (
+const getStakingBalanceV1 = async (
   address: string
 ): Promise<BigNumber> => {
   const nftRewardPoolV1 = getPositionNftRewardPoolV1Contract()
@@ -14,7 +14,7 @@ export const getStakingBalanceV1 = async (
   return new BigNumber(stakingBalance)
 }
 
-export const getPendingRewardV1 = async (
+const getPendingRewardV1 = async (
   address: string
 ): Promise<BigNumber> => {
   const nftRewardPoolV1 = getPositionNftRewardPoolV1Contract()
@@ -26,7 +26,7 @@ export const getPendingRewardV1 = async (
   return new BigNumber(pendingReward)
 }
 
-export const getStakingBalanceAndPendingRewardOfNftPoolV1 = async (
+const getStakingBalanceAndPendingRewardOfNftPoolV1 = async (
   address: string
 ): Promise<NftPool> => {
   const [stakingBalance, pendingReward] = await Promise.all([
@@ -43,7 +43,7 @@ export const getStakingBalanceAndPendingRewardOfNftPoolV1 = async (
 
 }
 
-export const getStakingBalanceV2 = async (
+const getStakingBalanceV2 = async (
   address: string
 ): Promise<BigNumber> => {
   const nftRewardPoolV2 = getPositionNftRewardPoolV2Contract()
@@ -55,7 +55,7 @@ export const getStakingBalanceV2 = async (
   return new BigNumber(stakingBalance)
 }
 
-export const getPendingRewardV2 = async (
+const getPendingRewardV2 = async (
   address: string
 ): Promise<BigNumber> => {
   const nftRewardPoolV2 = getPositionNftRewardPoolV2Contract()
@@ -67,7 +67,7 @@ export const getPendingRewardV2 = async (
   return new BigNumber(pendingReward)
 }
 
-export const getStakingBalanceAndPendingRewardOfNftPoolV2 = async (
+const getStakingBalanceAndPendingRewardOfNftPoolV2 = async (
   address: string
 ): Promise<NftPool> => {
   const [stakingBalance, pendingReward] = await Promise.all([

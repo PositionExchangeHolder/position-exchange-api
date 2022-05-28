@@ -24,3 +24,41 @@ export const DB_FIREBASE = {
     ACCOUNT_INFO: 'account-info'
   }
 }
+
+export const POOLS = [
+  {
+    pid: 0,
+    name: 'POSI-BUSD'
+  },
+  {
+    pid: 1,
+    name: 'POSI'
+  },
+  {
+    pid: 2,
+    name: 'POSI-WBNB'
+  },
+  {
+    pid: 3,
+    name: 'Bond01'
+  },
+  {
+    pid: 4,
+    name: 'Bond02'
+  },
+  {
+    pid: 5,
+    name: 'Bond03'
+  },
+]
+
+export const VAULTS = [
+  {
+    name: 'BUSD',
+    address: '0xf35848441017917a034589bfbec4b3783bb39cb2'
+  },
+  {
+    name: 'BNB',
+    address: '0xC1742A30b7469f49f37239B1c2905876821700e8'
+  }
+]

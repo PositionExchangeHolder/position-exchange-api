@@ -18,7 +18,8 @@ export const getTokenBalance = async (
 export const getTotalPosiBalance = (
   walletBalance: BigNumber,
   stakingPools?: StakingPool[],
-  nftPools?: NftPool[]
+  nftPools?: NftPool[],
+  vaultBalances?: StakingPool[]
 ): {
   total: BigNumber,
   walletBalance: BigNumber,
@@ -43,6 +44,12 @@ export const getTotalPosiBalance = (
     for (let i = 0; i < nftPools.length; i++) {
       totalPosiStaking = totalPosiStaking.plus(nftPools[i].stakingBalance)
       totalPosiPending = totalPosiPending.plus(nftPools[i].pendingReward)
+    }
+  }
+
+  if (vaultBalances) {
+    for (let i = 0; i < vaultBalances.length; i++) {
+      totalPosiPending = totalPosiPending.plus(vaultBalances[i].pendingReward)
     }
   }
 

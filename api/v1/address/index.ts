@@ -3,6 +3,7 @@ import { isAddress } from '../../../utils/address'
 import { getTokenBalance, getTotalPosiBalance } from '../../../utils/balance'
 import { getStakingBalanceAndPendingRewardOfNftPools } from '../../../utils/nftPool'
 import { getStakingBalanceAndPendingRewardOfStakingPool } from '../../../utils/stakingPool'
+import { getStakingAndPendingTokenOnVaults } from '../../../utils/vault'
 
 export default async (
   req: VercelRequest,
@@ -27,22 +28,26 @@ export default async (
       walletBalance,
       stakingPoolBalances,
       nftPoolBalances,
+      vaultBalances
     ] = await Promise.all([
       await getTokenBalance(address),
       await getStakingBalanceAndPendingRewardOfStakingPool(address),
-      await getStakingBalanceAndPendingRewardOfNftPools(address)
+      await getStakingBalanceAndPendingRewardOfNftPools(address),
+      await getStakingAndPendingTokenOnVaults(address)
     ])
     
     const totalPosiBalance = getTotalPosiBalance(
       walletBalance,
       stakingPoolBalances,
-      nftPoolBalances
+      nftPoolBalances,
+      vaultBalances
     )
 
     const data = {
       walletBalance,
       stakingPoolBalances,
       nftPoolBalances,
+      vaultBalances,
       totalPosiBalance
     }
 
